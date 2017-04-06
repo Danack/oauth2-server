@@ -28,6 +28,16 @@ The authorization server will respond with a JSON object containing the followin
 * `access_token` a JWT signed with the authorization server's private key
 * `refresh_token` an encrypted payload that can be used to refresh the access token when it expires.
 
+
+## Security
+The `client_secret needs` to be kept confidential and should not be exposed. For example, it shouldn't be embedded in a web-browser based application.
+
+If you want to use the password credential grant in a web-browser based app, you should either:
+
+* implement a serverside proxy for the ajax requests, that adds the client secret without exposing it to the end-users.
+* Copy and modify the \League\OAuth2\Server\Grant\PasswordGrant to not require the client_secret for password credentials grants.
+
+
 ## Setup
 
 Wherever you initialize your objects, initialize a new instance of the authorization server and bind the storage interfaces and authorization code grant:
